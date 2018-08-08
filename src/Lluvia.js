@@ -14,22 +14,13 @@ class Lluvia extends Component{
     constructor(props){
         super(props);
         this.state={
-            tasks: [
-            {name:"word1",
-            category:"empty", 
-            bgcolor: "yellow"},  
-         
-           {name:"word2", 
-            category:"empty", 
-            bgcolor:"pink"},  
-         
-           {name:"word3", 
-            category:"empty", 
-            bgcolor:"skyblue"}]
+            environment:{
+                place_state: "",
+                sky_state: "",
+                umbrella_state: "",
+            },
+            level: 0, //Level of poem 
         };
-
-        
-
     }
 
     render(){
@@ -41,5 +32,7 @@ class Lluvia extends Component{
         </div>);
     }
 }
+
+
 
 export default Lluvia;

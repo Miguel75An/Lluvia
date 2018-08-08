@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 
 import './Lluvia.css';
 
+const words = ['w0','w1','w2','w3',
+               'w4','w5','w6','w7',
+               'w8','w9','w10','w11',
+               'w12','w13','w14','w15',
+               'w16','w17','w18','w19',
+               'w20','w21','w22','w23',
+               'w24','w25','w26','w27',
+               'w28','w29','w30','w31'];
+
 class DragBox extends Component{
     constructor(props){
         super(props);
@@ -18,6 +27,21 @@ class DragBox extends Component{
     onDragStart(ev,word){
         console.log('Drag Start: ' + word);
         ev.dataTransfer.setData('new_word',word);
+    }
+
+    displayLevelWords(level,node_number){
+        // Takes the poem level to display words 
+        // corresponding to that level
+        if(level === 0){
+            return [0,1];
+        }
+        else if(level === 1){
+            return [2*(node_number + 1) + node_number,
+                    2*(node_number + 1) + node_number + 2];
+        }
+        else if(level === 2){
+            return [4*(node_number), 4*(node_number) + 3];
+        }
     }
 
     render(){
