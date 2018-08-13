@@ -20,15 +20,24 @@ class Lluvia extends Component{
                 umbrella_state: "",
             },
             level: 0, //Level of poem 
+            node_number: -1, //Current node
         };
+
+        this.umbrellaUpdate = this.umbrellaUpdate.bind(this);
+    }
+
+    umbrellaUpdate(e){
+        // Updates this.state.environment attributes based
+        // on level and node_number
+
     }
 
     render(){
         return(
         <div className='container'>
             <Poem />
-            <DragBox />
-            <Umbrella />
+            <DragBox level={this.state.level} node_number={this.state.node_number}/>
+            <Umbrella update={this.umbrellaUpdate} />
         </div>);
     }
 }

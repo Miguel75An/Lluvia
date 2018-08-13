@@ -8,12 +8,20 @@ class Umbrella extends Component{
         this.state={
 
         };
+
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(e){
+        console.log("Clicking Umbrella Canopy");
+        
     }
 
     render(){
         return(
         <div className='umbrellaBox'>
         <p>Umbrella Here</p>
+        <button onClick={(e) => this.onClick(e)}>Canopy</button>
         </div>
         );
     }

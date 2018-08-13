@@ -47,11 +47,20 @@ class DragBox extends Component{
     render(){
         let selections = [];
 
-        for(let i=0; i < this.state.words.length; i++){
-            selections.push(<p onDragStart={(e) => this.onDragStart(e,this.state.words[i].word)}
+        let word_range = this.displayLevelWords(this.props.level, this.props.node_number);
+
+        for(let i=word_range[0]; i<word_range[1]+1; i++){
+            selections.push(<p onDragStart={(e) => this.onDragStart(e,words[i])}
                             draggable
-                            key={this.state.words[i].index}>{this.state.words[i].word}</p>);
+                            key={i}>{words[i]}</p>);
         }
+
+        // for(let i=0; i < this.state.words.length; i++){
+        //     selections.push(<p onDragStart={(e) => this.onDragStart(e,this.state.words[i].word)}
+        //                     draggable
+        //                     key={this.state.words[i].index}>{this.state.words[i].word}</p>);
+        // }
+        
         return(
         <div className='dragBox'>
 
