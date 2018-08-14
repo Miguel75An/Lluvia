@@ -13,7 +13,8 @@ class Umbrella extends Component{
     }
 
     onClick(e){
-        console.log("Clicking Umbrella Canopy");
+        // console.log("Clicking Umbrella Canopy");
+        this.props.update(e);
         
     }
 

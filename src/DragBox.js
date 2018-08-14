@@ -24,33 +24,38 @@ class DragBox extends Component{
         this.onDragStart = this.onDragStart.bind(this);
     }
 
-    onDragStart(ev,word){
+    onDragStart(ev,word,index){
         console.log('Drag Start: ' + word);
         ev.dataTransfer.setData('new_word',word);
+        ev.dataTransfer.setData('new_index',index);
     }
 
-    displayLevelWords(level,node_number){
+    displayLevelWords(level,word_index){
         // Takes the poem level to display words 
         // corresponding to that level
+        console.log("level: "+level+"===");
+        console.log("index: "+word_index+"***");
+        
         if(level === 0){
             return [0,1];
         }
-        else if(level === 1){
-            return [2*(node_number + 1) + node_number,
-                    2*(node_number + 1) + node_number + 2];
+        else if(level === 1 && word_index <= 1){
+            return [2*(word_index + 1) + word_index,
+                    2*(word_index + 1) + word_index + 2];
         }
         else if(level === 2){
-            return [4*(node_number), 4*(node_number) + 3];
+            return [4*(word_index), 4*(word_index) + 3];
         }
     }
 
     render(){
         let selections = [];
 
-        let word_range = this.displayLevelWords(this.props.level, this.props.node_number);
+        let word_range = this.displayLevelWords(this.props.level, this.props.word_index);
+        console.log(word_range);
 
         for(let i=word_range[0]; i<word_range[1]+1; i++){
-            selections.push(<p onDragStart={(e) => this.onDragStart(e,words[i])}
+            selections.push(<p onDragStart={(e) => this.onDragStart(e,words[i],i)}
                             draggable
                             key={i}>{words[i]}</p>);
         }

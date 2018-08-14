@@ -8,7 +8,7 @@ class Poem extends Component{
         this.state={
             slots: [
                 {numeral:0,
-                type:'__noun__'},
+                content:'__noun__'},
             ]
         };
         this.onDragOver = this.onDragOver.bind(this);
@@ -23,8 +23,14 @@ class Poem extends Component{
     onDrop(ev,arr_index){
         let replacement = ev.dataTransfer.getData('new_word');
         let slots_copy = this.state.slots;
-        slots_copy[arr_index].type = replacement;
+        slots_copy[arr_index].content = replacement;
         this.setState({slots:slots_copy});
+
+        //Update <Lluvia /> component using function
+        let new_index = ev.dataTransfer.getData('new_index');
+        
+        //Things pass through set(Data) can only be strings. Objects can be converted to JSONs first.
+        this.props.update(ev,replacement,parseInt(new_index,10));
     }
 
     render(){
@@ -35,7 +41,7 @@ class Poem extends Component{
                 onDragOver={(e) => this.onDragOver(e)}
                 onDrop={(e) => this.onDrop(e,i)}
                 key={this.state.slots[i].numeral}>
-                {this.state.slots[i].type}
+                {this.state.slots[i].content}
                  </div>
             )
         }
