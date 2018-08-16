@@ -51,7 +51,6 @@ class Lluvia extends Component{
         let nextLevel = this.state.level + 1;
         this.setState({level:nextLevel});
 
-
     }
 
     poemUpdate(e,new_word,new_index){
@@ -68,7 +67,7 @@ class Lluvia extends Component{
     render(){
         return(
         <div className='container'>
-            <Poem update={this.poemUpdate} />
+            <Poem    level={this.state.level} current_word={this.state.current_word} update={this.poemUpdate} />
             <DragBox level={this.state.level} word_index={this.state.word_index}/>
             <Umbrella update={this.umbrellaUpdate} />
             {env_conditions[this.state.current_word]};

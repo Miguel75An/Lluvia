@@ -39,13 +39,19 @@ class DragBox extends Component{
         if(level === 0){
             return [0,1];
         }
-        else if(level === 1 && word_index <= 1){
+        else if(level === 1){
             return [2*(word_index + 1) + word_index,
                     2*(word_index + 1) + word_index + 2];
         }
         else if(level === 2){
             return [4*(word_index), 4*(word_index) + 3];
         }
+    }
+
+    shouldComponentUpdate(nextProps){
+        //Return true if there is an update to the level
+        //Else return false if ONLY word_index changes or nothing at all
+        return (nextProps.level === this.props.level)?false:true;
     }
 
     render(){
