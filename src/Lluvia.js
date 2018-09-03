@@ -32,11 +32,17 @@ class Lluvia extends Component{
             environment:{
                 place_state: "",
                 sky_state: "",
-                umbrella_state: "",
+                umbrella_state: "", 
+                //Might need more things to change the environment
+                //Ideas: rain, thunder, castle, water ponds, broken umbrella, holes in umbrella
+                //sunlight rays, 
+
+                //words: orwellian, kafkasque
             },
-            level: 0, //Level of poem 
-            current_word: "none", //Current node
-            word_index: -1,
+            level: 0,             //Level of poem 
+            poem_word:"none",     //This one changes only when umbrella is updated
+            current_word: "none", //Changes constantly with every drag
+            word_index: -1,       //Used to render the choice words in DragBox
         };
 
         this.umbrellaUpdate = this.umbrellaUpdate.bind(this);
@@ -47,27 +53,23 @@ class Lluvia extends Component{
         // Updates this.state.level: printing the new part of the poem
         console.log("Updating this.state.environment");
         
-        //Use Set State here! Increase level word by one
         let nextLevel = this.state.level + 1;
-        this.setState({level:nextLevel});
-
+        this.setState({level:nextLevel});   //Increase level by one
+        this.setState({poem_word:this.state.current_word}) //Update the word that renders a verse
     }
 
     poemUpdate(e,new_word,new_index){
-        console.log("Updating this.state.node_number");
 
-        //Since the render() function will return {changes[node_number]}
-        //then it is possible to 
+        // current_word gets a new value that might become
+        // poem_word if there is an umbrellaUpdate() call       
         this.setState({current_word:new_word});
         this.setState({word_index:new_index});
-        
-        console.log("NewWord: " + new_word + " NewIndex: " + new_index);
     }
 
     render(){
         return(
         <div className='container'>
-            <Poem    level={this.state.level} current_word={this.state.current_word} update={this.poemUpdate} />
+            <Poem    level={this.state.level} poem_word={this.state.poem_word} update={this.poemUpdate} />
             <DragBox level={this.state.level} word_index={this.state.word_index}/>
             <Umbrella update={this.umbrellaUpdate} />
             {env_conditions[this.state.current_word]};

@@ -46,6 +46,9 @@ class DragBox extends Component{
         else if(level === 2){
             return [4*(word_index), 4*(word_index) + 3];
         }
+        else{
+            return [];
+        }
     }
 
     shouldComponentUpdate(nextProps){
