@@ -7,7 +7,7 @@ class Poem extends Component{
         super(props);
 
         this.state={
-            drop_word:"###blank###",
+            drop_word:"_ _ _",
         };
 
         this.onDragOver = this.onDragOver.bind(this);
@@ -71,10 +71,15 @@ class Poem extends Component{
         return <div>{left}{drop_field}{right}</div>;
     }
 
-    addToStanza(){
-
+    componentDidUpdate(prevProps){
+        // Check if poem_word has changed since
+        // it indicates if a new verse has been loaded.
+        // If it has then drop_word becomes "_ _ _"
+        // to allow for new drop word.
+        if(this.props.poem_word !== prevProps.poem_word){
+            this.setState({drop_word:'_ _ _'});
+        }
     }
-
 
     render(){
         
@@ -85,7 +90,7 @@ class Poem extends Component{
             <br></br> */}
 
             {this.props.stanza.map((line) => (
-                line
+                <div>{line}<br></br></div> 
             ))}
 
             {this.processVerse(poem_lines[this.props.poem_word])}
