@@ -43,6 +43,9 @@ class Lluvia extends Component{
             poem_word:"none",     //This one changes only when umbrella is updated
             current_word: "none", //Changes constantly with every drag
             word_index: -1,       //Used to render the choice words in DragBox
+
+            stanza: [], //Renders the poem so far
+            verse: "nothing", //Possible verse that might end up in stanza
         };
 
         this.umbrellaUpdate = this.umbrellaUpdate.bind(this);
@@ -56,23 +59,32 @@ class Lluvia extends Component{
         let nextLevel = this.state.level + 1;
         this.setState({level:nextLevel});   //Increase level by one
         this.setState({poem_word:this.state.current_word}) //Update the word that renders a verse
+
+        //Update the stanza
+        let copy_stanza = this.state.stanza;
+        copy_stanza.push(this.state.verse);
+        this.setState({stanza:copy_stanza});
+        
+        console.log(this.state.stanza);
     }
 
-    poemUpdate(e,new_word,new_index){
+    poemUpdate(e,new_word,new_index,new_verse){
 
         // current_word gets a new value that might become
         // poem_word if there is an umbrellaUpdate() call       
         this.setState({current_word:new_word});
         this.setState({word_index:new_index});
+        this.setState({verse:new_verse});
+
     }
 
     render(){
         return(
         <div className='container'>
-            <Poem    level={this.state.level} poem_word={this.state.poem_word} update={this.poemUpdate} />
+            <Poem    stanza={this.state.stanza} poem_word={this.state.poem_word} update={this.poemUpdate} />
             <DragBox level={this.state.level} word_index={this.state.word_index}/>
             <Umbrella update={this.umbrellaUpdate} />
-            {env_conditions[this.state.current_word]};
+            {/* {env_conditions[this.state.poem_word]} */}
         </div>);
     }
 }

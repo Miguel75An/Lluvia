@@ -68,12 +68,6 @@ class DragBox extends Component{
                             draggable
                             key={i}>{words[i]}</p>);
         }
-
-        // for(let i=0; i < this.state.words.length; i++){
-        //     selections.push(<p onDragStart={(e) => this.onDragStart(e,this.state.words[i].word)}
-        //                     draggable
-        //                     key={this.state.words[i].index}>{this.state.words[i].word}</p>);
-        // }
         
         return(
         <div className='dragBox'>

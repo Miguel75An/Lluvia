@@ -5,10 +5,11 @@ import './Lluvia.css';
 class Poem extends Component{
     constructor(props){
         super(props);
+
         this.state={
-            stanza:[],
             drop_word:"###blank###",
         };
+
         this.onDragOver = this.onDragOver.bind(this);
         this.onDrop = this.onDrop.bind(this);
         this.processVerse = this.processVerse.bind(this);
@@ -29,19 +30,31 @@ class Poem extends Component{
         // Word just dragged becomes the new drop_word
         this.setState({drop_word:replacement});
 
-        //Make an poemUpdate() call
-        this.props.update(ev,replacement,parseInt(new_index,10));
+        // Get the current verse
+        let verse = this.processVerse(poem_lines[this.props.poem_word],true,replacement);
+        //console.log(verse);
+
+        this.props.update(ev,replacement,parseInt(new_index,10),verse); //Make an poemUpdate() call
+
         //Things pass through set(Data) can only be strings. Objects can be converted to JSONs first.
     }
 
-    processVerse(verse){
+    processVerse(verse,use_outside_word, outside_word){
+        //use_drop_word tells us if we should use drop_word 
         let copy_verse = verse;
-        let drop_field = <a 
+        let drop_field;
+        if(use_outside_word){
+            drop_field = outside_word;
+        }
+        else{
+            drop_field = <a 
                 onDragOver={(e) => this.onDragOver(e)}
                 onDrop={(e) => this.onDrop(e)}
                 >
                 {this.state.drop_word}
                 </a>;
+        }
+        
 
         //Left: chars before #, Right: chars after #
         let left = "";
@@ -67,10 +80,13 @@ class Poem extends Component{
         
         return(
         <div className='poemBox'>
-            <p>Oh! Those words, unmentionable. Unwritten in the air.</p>
-            <br></br>
 
-            {this.state.stanza}
+            {/* <p>Oh! Those words, unmentionable. Unwritten in the air.</p>
+            <br></br> */}
+
+            {this.props.stanza.map((line) => (
+                line
+            ))}
 
             {this.processVerse(poem_lines[this.props.poem_word])}
 
@@ -98,7 +114,7 @@ class Poem extends Component{
                "w16": "Those trees so tall in the horizon",
                "w17": "Dimn lights burning in the rain",
                "w18": "Elegant # suits, adorned with illusion",
-               "w19": "Oh, have you found it?",
+               "w19": "Oh, # have you found it?",
                "w20": "So precise, yet so abstract #",
                "w21": "A pile of # endless books",
                "w22": "Well, the # clock is nowhere",
