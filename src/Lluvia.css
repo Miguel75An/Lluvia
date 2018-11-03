@@ -1,5 +1,6 @@
 /* Fonts */
 /* @import url('https://fonts.googleapis.com/css?family=Open+Sans'); */
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond');
 
 * {
     margin: 0;
@@ -12,23 +13,32 @@
     font-size:5;
     /* Important if horizontal <div>'s are desired */
     background-color: lightblue;
+
+
+    /* temporary rain */
+    /* background-image: url("rain.jpg"); */
+    background-image: url("rain_light.jpg"); 
 }
 .poemBox{
     width: 10%;
     height: 75%;
     float: left;
-    background-color: lightgreen;
+    /* background-color: lightgreen; */
     border-collapse: collapse;
 
     margin-top: 2%;
-    margin-left: 2%
+    margin-left: 2%;
+
+    /* Text styling */
+    font-family: 'Cormorant Garamond', serif;
+    color: white;
 }
 
 .dragBox{
     width: 10%;
     height: 50%;
     float: left;
-    background-color: royalblue;
+    /* background-color: royalblue; */
     border-collapse: collapse;
 
     margin-top: 2%;
@@ -40,7 +50,7 @@
     height: 75%;
     position: relative;
     float: right;
-    background-color: lightseagreen;
+    /* background-color: lightseagreen; */
     border-collapse: collapse;
 
     margin-top: 2%;
